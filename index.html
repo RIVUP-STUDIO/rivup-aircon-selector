@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#071a33">
+  <title>RIVUP エアコン選定シミュレーター</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="brand">
+      <div class="logo-row">
+        <div class="logo">RIVUP<span class="air">≋</span></div>
+        <span class="badge">簡易診断</span>
+      </div>
+      <p>お部屋の条件から、エアコン能力の目安を診断します。</p>
+    </header>
+
+    <section id="startScreen" class="card hero">
+      <div class="hero-icon">❄️</div>
+      <p class="eyebrow">約1分・全8問</p>
+      <h1>あなたの部屋に合う<br><span>エアコン容量</span>を診断</h1>
+      <p class="lead">広さだけではなく、建物・日当たり・窓・使い方まで考慮して判定します。</p>
+      <button id="startBtn" class="primary">診断を始める</button>
+      <p class="note">※家庭用壁掛けエアコンの簡易目安です。最終選定には現地確認が必要です。</p>
+    </section>
+
+    <section id="quizScreen" class="card hidden">
+      <div class="progress-head">
+        <span id="stepText">1 / 8</span>
+        <button id="backBtn" class="text-btn" type="button">← 戻る</button>
+      </div>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <div id="questionArea"></div>
+    </section>
+
+    <section id="resultScreen" class="hidden">
+      <div class="card result-main">
+        <p class="eyebrow">診断結果</p>
+        <div class="result-ring">
+          <span id="resultKw">4.0</span>
+          <small>kWクラス</small>
+        </div>
+        <h2 id="resultClass">主に14畳用がおすすめ</h2>
+        <p id="resultSummary" class="result-summary"></p>
+        <div class="confidence"><span>診断の確信度</span><strong id="confidenceText">中</strong></div>
+      </div>
+
+      <div class="card">
+        <h3>判定した理由</h3>
+        <ul id="reasonList" class="reason-list"></ul>
+      </div>
+
+      <div class="card detail-grid">
+        <div><span>基準能力</span><strong id="baseKw"></strong></div>
+        <div><span>補正後の目安</span><strong id="adjustedKw"></strong></div>
+        <div><span>検討範囲</span><strong id="rangeKw"></strong></div>
+        <div><span>電源の目安</span><strong id="powerGuide"></strong></div>
+      </div>
+
+      <div class="card caution">
+        <h3>⚠️ 現地確認をおすすめする条件</h3>
+        <p id="cautionText"></p>
+      </div>
+
+      <div class="card contact">
+        <p class="eyebrow">RIVUP 無料相談</p>
+        <h3>写真を送れば、設置環境まで確認します</h3>
+        <p>診断内容をコピーして、LINEでお送りください。</p>
+        <button id="copyBtn" class="secondary">診断内容をコピー</button>
+        <a id="lineBtn" class="primary line" href="#" role="button">LINEで無料見積もり</a>
+        <p class="mini">※LINEリンクは公開前にRIVUP公式アカウントURLへ差し替えてください。</p>
+      </div>
+
+      <button id="restartBtn" class="text-restart">もう一度診断する</button>
+    </section>
+
+    <footer>RIVUP AIR CONDITIONER SELECTOR</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
