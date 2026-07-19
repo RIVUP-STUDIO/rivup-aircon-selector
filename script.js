@@ -218,13 +218,9 @@ function showResult(){
       alert(copyText);
     }
   };
-  $("lineBtn").onclick=(e)=>{
-    const url="https://line.me/R/ti/p/@YOUR_LINE_ID";
-    if(url.includes("YOUR_LINE_ID")){
-      e.preventDefault();
-      alert("公開前に script.js 内のLINE URLを、RIVUP公式LINEのURLへ差し替えてください。");
-    }
-  };
+  $("lineBtn").href = "https://line.me/R/ti/p/@666fndgb";
+  
+
 }
 
 function buildCopyText(selected, adjusted, confidence){
