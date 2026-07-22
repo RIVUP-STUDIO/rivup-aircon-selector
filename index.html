@@ -6,6 +6,35 @@
   <meta name="theme-color" content="#071a33">
   <title>RIVUP エアコン選定シミュレーター</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* --- 楽天リンクカード(追加分) --- */
+    .shop-card .pr-label{
+      display:inline-block;
+      margin-left:6px;
+      padding:1px 7px;
+      font-size:10px;
+      letter-spacing:.08em;
+      border:1px solid currentColor;
+      border-radius:999px;
+      opacity:.65;
+      vertical-align:middle;
+    }
+    .rakuten-btn{
+      display:block;
+      width:100%;
+      box-sizing:border-box;
+      text-align:center;
+      text-decoration:none;
+      padding:14px 16px;
+      margin-top:12px;
+      border-radius:12px;
+      font-weight:700;
+      background:#bf0000;
+      color:#fff;
+    }
+    .rakuten-btn:active{opacity:.85;}
+    .shop-card .note{margin-top:10px;}
+  </style>
 </head>
 <body>
   <main class="app-shell">
@@ -70,7 +99,14 @@
         <p>診断内容をコピーして、LINEでお送りください。</p>
         <button id="copyBtn" class="secondary">診断内容をコピー</button>
         <a id="lineBtn" class="primary line" href="#" role="button">LINEで無料見積もり</a>
-        
+      </div>
+
+      <div class="card shop-card">
+        <p class="eyebrow">ご自身で購入される方へ<span class="pr-label">PR</span></p>
+        <h3 id="rakutenHeading">楽天市場でエアコンをチェック</h3>
+        <p>診断結果に合ったクラスの商品一覧が開きます。</p>
+        <a id="rakutenBtn" class="rakuten-btn" href="https://search.rakuten.co.jp/search/mall/%E3%82%A8%E3%82%A2%E3%82%B3%E3%83%B3/" target="_blank" rel="noopener sponsored">楽天でエアコンを見る</a>
+        <p class="note">※ご自身で購入されたエアコンの取付工事も、RIVUPにご相談いただけます。<br>※上記は広告リンクを含みます。</p>
       </div>
 
       <button id="restartBtn" class="text-restart">もう一度診断する</button>
@@ -78,6 +114,42 @@
 
     <footer>RIVUP AIR CONDITIONER SELECTOR</footer>
   </main>
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
+  <script>
+  /* --- 楽天アフィリエイトリンク自動生成(追加分) --- */
+  (function(){
+    var AFF_ID = "55fbae23.fe1e35b2.55fbae24.bac311cc";
+    var resultScreen = document.getElementById("resultScreen");
+    var btn = document.getElementById("rakutenBtn");
+    var heading = document.getElementById("rakutenHeading");
+    if(!resultScreen || !btn) return;
+
+    function buildLink(query){
+      var searchUrl = "https://search.rakuten.co.jp/search/mall/" + encodeURIComponent(query) + "/";
+      return "https://hb.afl.rakuten.co.jp/hgc/" + AFF_ID + "/?pc=" +
+             encodeURIComponent(searchUrl) + "&m=" + encodeURIComponent(searchUrl);
+    }
+
+    function updateRakutenLink(){
+      if(resultScreen.classList.contains("hidden")) return;
+      var text = (document.getElementById("resultClass") || {}).textContent || "";
+      var match = text.match(/(\d+)\s*畳/);
+      if(match){
+        var jo = match[1];
+        btn.href = buildLink("エアコン " + jo + "畳");
+        btn.textContent = "楽天で" + jo + "畳用エアコンを見る";
+        if(heading) heading.textContent = "楽天市場で" + jo + "畳用エアコンをチェック";
+      }else{
+        btn.href = buildLink("エアコン");
+        btn.textContent = "楽天でエアコンを見る";
+        if(heading) heading.textContent = "楽天市場でエアコンをチェック";
+      }
+    }
+
+    new MutationObserver(updateRakutenLink)
+      .observe(resultScreen, { attributes:true, attributeFilter:["class"] });
+    updateRakutenLink();
+  })();
+  </script>
 </body>
 </html>
